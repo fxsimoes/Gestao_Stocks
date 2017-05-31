@@ -1,12 +1,28 @@
 package io.altar.jseproject.model;
 
+import io.altar.jseproject.textinterface.TextInterface;
+
 public class Product {
 	
 	public int product_id;
 	
 	public String Shelves;
 	
-	public Product(){}
+	public float discount;
+	
+	public int iva;
+	
+	public float price;
+	
+	public Product(int DiscountValue, int ivaTax, int finalPrice){
+		
+		discount= DiscountValue;
+		iva= ivaTax;
+		price=finalPrice;
+		
+		TextInterface.pList.add(this);
+	}
+		
 	
 //	public Product(String Shelves){
 //		this.Shelves = name;
@@ -16,11 +32,6 @@ public class Product {
 //		return this.name;
 //	}
 //	
-	public float discount;
-	
-	public int iva;
-	
-	public float finalPrice;
 
 	public int getProduct_id() {
 		return product_id;
@@ -54,11 +65,11 @@ public class Product {
 		this.iva = iva;
 	}
 
-	public float getFinalPrice() {
-		return finalPrice;
+	public float getPrice() {
+		return price;
 	}
 
-	public void setFinalPrice(float finalPrice) {
-		this.finalPrice = finalPrice;
+	public void setPrice(float price) {
+		this.price = price;
 	}
 }

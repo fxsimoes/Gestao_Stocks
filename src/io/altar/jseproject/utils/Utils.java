@@ -1,6 +1,8 @@
 package io.altar.jseproject.utils;
 
-import io.altar.jseproject.test.Test;
+import java.util.stream.IntStream;
+
+import io.altar.jseproject.utils.Test;
 
 public class Utils {
 
@@ -22,9 +24,36 @@ public class Utils {
 				Test.scanner.next();
 			}
 		}
-		
 	}
+
+	public static int ivaVal(int choice){
+		
+			
+		while (choice != 6 && choice != 12 && choice !=21 && choice !=23){
 	
-//	public static 
-	
+			if (Test.scanner.hasNextInt()) {
+			choice = Test.scanner.nextInt();
+			}
+		
+		 else {
+			System.out.println("Error, NaN. Input a number.");
+			Test.scanner.next();
+		 	}
+			System.out.println("Input correct IVA value (2, 6, 21 or 23): ");
+		}
+		return choice;
+/*		if (Test.scanner.hasNextInt()) {
+			if (choice == 2 || choice ==6 || choice == 21 || choice == 23) {
+				
+				System.out.println("Done");
+				return choice;
+			} else {
+				
+				Test.scanner.next();
+			}
+		} else {
+			System.out.println("Error, NaN. Input a number.");
+			Test.scanner.next();
+		} */
+	}
 }

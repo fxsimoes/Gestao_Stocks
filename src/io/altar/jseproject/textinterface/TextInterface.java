@@ -1,8 +1,10 @@
 package io.altar.jseproject.textinterface;
 
 import java.util.ArrayList;
+
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.utils.Utils;
+
 
 public class TextInterface {
 	
@@ -43,17 +45,16 @@ public class TextInterface {
 		int x;
 		int y;
 		int z;
-		
+
     	switch (option){
     	case 1:
     		System.out.println("Enter the Product's discount: ");
     		x = Utils.numValidate(0, 100);
     		System.out.println("Enter the Product's IVA: ");
-    		y = Utils.numValidate(0, 100);
+    		y = Utils.ivaVal(option);
     		System.out.println("Enter the Product's price: ");
     		z = Utils.numValidate(0, 5000);
     		Product p = new Product(x, y, z);
-    		System.out.println(p);
     		break;
     	case 2:
     		break;

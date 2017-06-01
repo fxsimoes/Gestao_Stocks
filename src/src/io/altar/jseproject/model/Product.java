@@ -1,6 +1,7 @@
 package io.altar.jseproject.model;
 
-import io.altar.jseproject.utils.Utils;
+import io.altar.jseproject.textinterface.TextInterface;
+
 
 public class Product {
 
@@ -19,14 +20,14 @@ public class Product {
 		return "ID  " + product_id + "  | PVP  " + price + "€  | Discount  " + discount + "€  | IVA  " + iva + "%";
 	}
 	
-	public Product(int id, double finalPrice, int ivaTax, double DiscountValue){
+	public Product(int id, double finalPrice, double DiscountValue, int ivaTax){
 		
 		product_id=id;
 		discount= DiscountValue;
 		iva= ivaTax;
 		price=finalPrice;
 		
-		Utils.pList.add(this);
+		TextInterface.pList.add(this);
 	}
 		
 	

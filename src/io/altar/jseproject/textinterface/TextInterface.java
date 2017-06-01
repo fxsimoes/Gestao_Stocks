@@ -1,15 +1,9 @@
 package io.altar.jseproject.textinterface;
 
-import java.util.ArrayList;
-
-import io.altar.jseproject.model.Product;
 import io.altar.jseproject.utils.Utils;
 
 
 public class TextInterface {
-	
-	
-	public static ArrayList<Product> pList = new ArrayList<Product>();
 	
 	public static void mainMenu(){
 		
@@ -33,8 +27,6 @@ public class TextInterface {
 	
 	public static void ProductList(){
 		
-		// List Products
-		
 		System.out.println("1. Create new products");
 		System.out.println("2. Edit existing products");
 		System.out.println("3. Product details");
@@ -42,19 +34,11 @@ public class TextInterface {
 		System.out.println("5. Return to previous menu");
 		
 		int option = Utils.numValidate(1, 5);
-		int x;
-		int y;
-		int z;
-
+		
     	switch (option){
     	case 1:
-    		System.out.println("Enter the Product's discount: ");
-    		x = Utils.numValidate(0, 100);
-    		System.out.println("Enter the Product's IVA: ");
-    		y = Utils.ivaVal(option);
-    		System.out.println("Enter the Product's price: ");
-    		z = Utils.numValidate(0, 5000);
-    		Product p = new Product(x, y, z);
+    		Utils.productCase1(option);
+    		ProductList();
     		break;
     	case 2:
     		break;

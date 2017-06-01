@@ -1,26 +1,32 @@
 package io.altar.jseproject.model;
 
-import io.altar.jseproject.textinterface.TextInterface;
+import io.altar.jseproject.utils.Utils;
 
 public class Product {
-	
+
 	public int product_id;
 	
 	public String Shelves;
 	
-	public float discount;
+	public double discount;
 	
 	public int iva;
 	
-	public float price;
+	public double price;
+
+	@Override
+	public String toString(){
+		return "ID  " + product_id + "  | PVP  " + price + "€  | Discount  " + discount + "€  | IVA  " + iva + "%";
+	}
 	
-	public Product(int DiscountValue, int ivaTax, int finalPrice){
+	public Product(int id, double finalPrice, int ivaTax, double DiscountValue){
 		
+		product_id=id;
 		discount= DiscountValue;
 		iva= ivaTax;
 		price=finalPrice;
 		
-		TextInterface.pList.add(this);
+		Utils.pList.add(this);
 	}
 		
 	
@@ -49,7 +55,7 @@ public class Product {
 		Shelves = shelves;
 	}
 
-	public float getDiscount() {
+	public double getDiscount() {
 		return discount;
 	}
 
@@ -65,7 +71,7 @@ public class Product {
 		this.iva = iva;
 	}
 
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 

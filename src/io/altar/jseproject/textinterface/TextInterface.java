@@ -1,15 +1,13 @@
 package io.altar.jseproject.textinterface;
 
-import java.util.ArrayList;
+
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.test.Test;
-import src.io.altar.jseproject.utils.Utils;
+import io.altar.jseproject.utils.Utils;
 
 
 public class TextInterface {
@@ -168,10 +166,14 @@ public class TextInterface {
 		//		Inputs
 		System.out.println("Enter the ID of the product you want to evaluate: ");
 		int w = Utils.numValidate(0, pId);	
-		
+		boolean blnExists = pList.containsKey(w);
+		System.out.println(blnExists);
 		for (Entry<Integer, Product> entry : pList.entrySet()){
-		   if (entry.getKey().equals(pId)){
+		   if (entry.getKey().equals(pId) && blnExists == false){
 		      System.out.println(entry.getValue());
+		   }
+		   else if (blnExists == false){
+			   System.out.println("Please enter a valid ID: ");
 		   }
 		}
 		System.out.println(pList.get(w));

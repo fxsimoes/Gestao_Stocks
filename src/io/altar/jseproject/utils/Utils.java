@@ -1,4 +1,4 @@
-package src.io.altar.jseproject.utils;
+package io.altar.jseproject.utils;
 
 import io.altar.jseproject.test.Test;
 

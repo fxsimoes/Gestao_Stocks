@@ -1,15 +1,13 @@
 package io.altar.jseproject.textinterface;
 
-import java.util.ArrayList;
+
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.test.Test;
-import src.io.altar.jseproject.utils.Utils;
+import io.altar.jseproject.utils.Utils;
 
 
 public class TextInterface {

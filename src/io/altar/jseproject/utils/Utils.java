@@ -14,9 +14,10 @@ public class Utils {
 				option = Test.scanner.nextInt();
 				if (option >= min && option <= max) {
 					return option;
-				} else {
+				} else if(min != max){
 					System.out.println("Please input a number between " + min + " and " + max);
-
+				}else{
+					System.out.println("Please input " + min + ", as it is the only option you currently have: ");
 				}
 			} else {
 				System.out.println("Error, NaN. Input a number.");

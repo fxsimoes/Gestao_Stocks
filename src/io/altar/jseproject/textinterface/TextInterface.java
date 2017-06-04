@@ -15,7 +15,7 @@ public class TextInterface {
 	public static LinkedHashMap<Integer, Product> pList = new LinkedHashMap<Integer, Product>();
 	Set<Entry<Integer, Product>> set = pList.entrySet();
 	
-	private static int pId=1;
+	private static int pId=0;
 	
 	public static void mainMenu(){
 		
@@ -55,14 +55,18 @@ public class TextInterface {
     		break;
     	case 2:
     		productEdit();
+    		productList();
     		break;
     	case 3:
     		productDetails();
+    		productList();
     		break;
     	case 4:
+    		productRemove();
+    		productList();
     		break;
     	case 5:
-    		TextInterface.mainMenu();
+    		mainMenu();
     	}
 	}
 	
@@ -85,7 +89,7 @@ public class TextInterface {
     	case 4:
     		break;
     	case 5:
-    		TextInterface.mainMenu();
+    		mainMenu();
     	}
 	}	
 
@@ -110,12 +114,12 @@ public class TextInterface {
 
 		// 		 Round number to 2 float places
 		double yx= y*100/x;
-		double roundOff2 = Math.round(yx*100.0)/100.0;
+		double roundfloat2 = Math.round(yx*100.0)/100.0;
 		
 		// 		 Create product and show results
-		System.out.println("\nYour newly added product has " + roundOff2 + "% discount. \n");
-		Product p = new Product(pId, x, y, z);
+		System.out.println("\nYour newly added product has " + roundfloat2 + "% discount. \n");
 		pId++;
+		Product p = new Product(pId, x, y, z);
 		System.out.println("\nProduct successfully created. Returning to previous menu..\n");
 		
 		//			Show Products in different lines
@@ -127,57 +131,78 @@ public class TextInterface {
 	
 	//			Edit Product Details
 	public static void productEdit(){
-
+		
+		
 	//		Inputs
+	if(pList.containsKey(1)){
 		System.out.println("Enter the ID of the product you want to edit: ");
-		int w = Utils.numValidate(0, pId);	
+		int w = Utils.numValidate(1, pId);	
 		
 		for (Entry<Integer, Product> entry : pList.entrySet()){
 		   if (entry.getKey().equals(pId)){
 		      System.out.println(entry.getValue());
-		   }
+					  }
 		}
-		
-		System.out.println("Enter the Product's new price (€): ");
-		double x = priceVal(0.01);	
-		System.out.println("Enter the Product's new discount (€): ");
-		double y = discountVal(0, x);
-		System.out.println("Enter the Product's new IVA value (%): ");
-		int z = ivaVal();
+			System.out.println("The products current price is " + "€. Enter the Product's new price (€): ");
+			double x = priceVal(0.01);	
+			System.out.println("Enter the Product's new discount (€): ");
+			double y = discountVal(0, x);
+			System.out.println("Enter the Product's new IVA value (%): ");
+			int z = ivaVal();
 
-		//		Product overwrite
-		Product p = new Product(w, x, y, z);
-		pList.put(w,p);
-		
-		//		Success messages
-		System.out.println("\nThe product with ID of "+ w +" has been successfully edited. ");
-		System.out.println("Its new PVP, Discount and IVA are "+x+"€, "+y+"€, "+z+"% respectively.");
-		System.out.println("\n");
+			//		Product overwrite
+			Product p = new Product(w, x, y, z);
+			pList.replace(w,p);
+			
+			//		Success messages
+			System.out.println("\nThe product with ID of "+ w +" has been successfully edited. ");
+			System.out.println("Its new PVP, Discount and IVA are "+x+"€, "+y+"€, "+z+"% respectively.");
+			System.out.println("\n");		
+		}
+		else{
+			System.out.println("You have no products to edit. Returning to main menu.");	
+		}
 		
 		for(Integer id:pList.keySet()){
 			System.out.println(pList.get(id));
 		}
-		System.out.println("\n");
+			System.out.println("\n");
 	}
-	
+
 	// 		Show Product Details
 	public static void productDetails(){
 		
 		//		Inputs
-		System.out.println("Enter the ID of the product you want to evaluate: ");
-		int w = Utils.numValidate(0, pId);	
-		boolean blnExists = pList.containsKey(w);
-		System.out.println(blnExists);
-		for (Entry<Integer, Product> entry : pList.entrySet()){
-		   if (entry.getKey().equals(pId) && blnExists == false){
-		      System.out.println(entry.getValue());
-		   }
-		   else if (blnExists == false){
-			   System.out.println("Please enter a valid ID: ");
-		   }
-		}
-		System.out.println(pList.get(w));
+	if (pList.containsKey(1)){
 		
+		System.out.println("Enter the ID of the product you want to evaluate: ");
+		int w = Utils.numValidate(1, pId);
+		
+		for (Entry<Integer, Product> entry : pList.entrySet()){
+			if (entry.getKey().equals(pId)){
+				System.out.println(entry.getValue());
+		  	}
+		}
+		}else{
+			System.out.println("You have no products to check details from. Please insert some before.");
+		}
+	}
+	
+	public static void productRemove(){
+		
+		if (pList.containsKey(1)){
+			
+			System.out.println("Enter the ID of the product you want to evaluate: ");
+			int w = Utils.numValidate(1, pId);
+			
+			for (Entry<Integer, Product> entry : pList.entrySet()){
+				if (entry.getKey().equals(pId)){
+					System.out.println(entry.getValue());
+			  	}
+			}
+			}else{
+				System.out.println("You have no products to remove. Please insert some before.");
+			}
 	}
 	
 	// 			Validações do Produto
@@ -190,7 +215,6 @@ public class TextInterface {
 					return option;
 				} else {
 					System.out.println("Please input a valid number (higher than zero).");
-
 				}
 			} else {
 				System.out.println("Error, NaN. Input a number.");
@@ -198,7 +222,7 @@ public class TextInterface {
 			}
 		}
 	}
-	
+
 		// 			Validação do desconto
 	public static double discountVal(int min, double max){
 				

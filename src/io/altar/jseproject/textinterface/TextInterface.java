@@ -23,7 +23,7 @@ public class TextInterface {
     	System.out.println("2.List Shelves");
     	System.out.println("3.Exit");
     	
-    	int option = Utils.numValidate(1, 3);
+    	int option = Utils.Validate(1, 3);
     	
     	switch (option){
     	case 1:
@@ -46,7 +46,7 @@ public class TextInterface {
 		System.out.println("4. Remove products");
 		System.out.println("5. Return to previous menu");
 		
-		int option = Utils.numValidate(1, 5);
+		int option = Utils.Validate(1, 5);
 		
     	switch (option){
     	case 1:
@@ -78,7 +78,7 @@ public class TextInterface {
 		System.out.println("4. Remove shelves");
 		System.out.println("5. Return to previous menu");
 		
-		int option = Utils.numValidate(1, 5);
+		int option = Utils.Validate(1, 5);
     	switch (option){
     	case 1:
     		break;
@@ -106,20 +106,20 @@ public class TextInterface {
 		
 		//			Inputs
 		System.out.println("Enter the Product's price (€): ");
-		double x = priceVal(0.01);	
+		double price = Utils.Validate(0.01);	
 		System.out.println("Enter the Product's discount (€): ");
-		double y = discountVal(0, x);
+		double discount = Utils.Validate(0, price);
 		System.out.println("Enter the Product's IVA (%): ");
-		int z = ivaVal();
+		int iva = Utils.Validate();
 
 		// 		 Round number to 2 float places
-		double yx= y*100/x;
-		double roundfloat2 = Math.round(yx*100.0)/100.0;
+		double discountedPrice= discount*100/price;
+		double roundfloat2 = Math.round(discountedPrice*100.0)/100.0;
 		
 		// 		 Create product and show results
 		System.out.println("\nYour newly added product has " + roundfloat2 + "% discount. \n");
 		pId++;
-		Product p = new Product(pId, x, y, z);
+		Product p = new Product(pId, price, discount, iva);
 		System.out.println("\nProduct successfully created. Returning to previous menu..\n");
 		
 		//			Show Products in different lines
@@ -136,7 +136,7 @@ public class TextInterface {
 	//		Inputs
 	if(pList.containsKey(1)){
 		System.out.println("Enter the ID of the product you want to edit: ");
-		int w = Utils.numValidate(1, pId);	
+		int id = Utils.Validate(1, pId);	
 		
 		for (Entry<Integer, Product> entry : pList.entrySet()){
 		   if (entry.getKey().equals(pId)){
@@ -144,19 +144,19 @@ public class TextInterface {
 					  }
 		}
 			System.out.println("The products current price is " + "€. Enter the Product's new price (€): ");
-			double x = priceVal(0.01);	
+			double price = Utils.Validate(0.01);	
 			System.out.println("Enter the Product's new discount (€): ");
-			double y = discountVal(0, x);
+			double discount = Utils.Validate(0, price);
 			System.out.println("Enter the Product's new IVA value (%): ");
-			int z = ivaVal();
+			int iva = Utils.Validate();
 
 			//		Product overwrite
-			Product p = new Product(w, x, y, z);
-			pList.replace(w,p);
+			Product p = new Product(id, price, discount, iva);
+			pList.replace(id,p);
 			
 			//		Success messages
-			System.out.println("\nThe product with ID of "+ w +" has been successfully edited. ");
-			System.out.println("Its new PVP, Discount and IVA are "+x+"€, "+y+"€, "+z+"% respectively.");
+			System.out.println("\nThe product with ID of "+ id +" has been successfully edited. ");
+			System.out.println("Its new PVP, Discount and IVA are "+price+"€, "+discount+"€, "+iva+"% respectively.");
 			System.out.println("\n");		
 		}
 		else{
@@ -176,7 +176,7 @@ public class TextInterface {
 	if (pList.containsKey(1)){
 		
 		System.out.println("Enter the ID of the product you want to evaluate: ");
-		int w = Utils.numValidate(1, pId);
+		int id = Utils.Validate(1, pId);
 		
 		for (Entry<Integer, Product> entry : pList.entrySet()){
 			if (entry.getKey().equals(pId)){
@@ -193,8 +193,11 @@ public class TextInterface {
 		if (pList.containsKey(1)){
 			
 			System.out.println("Enter the ID of the product you want to evaluate: ");
-			int w = Utils.numValidate(1, pId);
+			int id = Utils.Validate(1, pId);
+			System.out.println("Are you sure you want to remove the product "+id+"? (Y/N):" );
+			String str = Utils.validateStr();
 			
+			pList.remove(id);
 			for (Entry<Integer, Product> entry : pList.entrySet()){
 				if (entry.getKey().equals(pId)){
 					System.out.println(entry.getValue());
@@ -203,66 +206,5 @@ public class TextInterface {
 			}else{
 				System.out.println("You have no products to remove. Please insert some before.");
 			}
-	}
-	
-	// 			Validações do Produto
-	public static int priceVal(double zero) {
-		
-		while (true) {
-			if (Test.scanner.hasNextInt()) {
-				int option = Test.scanner.nextInt();
-				if (option >= zero) {
-					return option;
-				} else {
-					System.out.println("Please input a valid number (higher than zero).");
-				}
-			} else {
-				System.out.println("Error, NaN. Input a number.");
-				Test.scanner.next();
-			}
-		}
-	}
-
-		// 			Validação do desconto
-	public static double discountVal(int min, double max){
-				
-		while (true) {
-			if (Test.scanner.hasNextInt()) {
-				int option = Test.scanner.nextInt();
-				if (option >= min && option <= max) {
-					return option;
-				} else {
-					System.out.println("Please input a number between " + min + " and the product's total price (" + max + "€)");
-				}
-			} else {
-				System.out.println("Error, NaN. Input a number.");
-				Test.scanner.next();
-			}
-		}
-		
-	}
-	
-	// 			Validação do IVA
-	public static int ivaVal(){
-		
-		while(true) {
-			while (!Test.scanner.hasNextInt() ) {
-				System.out.println("Por favor, escolha uma das opcões");
-				Test.scanner.next();
-			}
-			int option = Test.scanner.nextInt();
-			switch (option){
-				case 0: 
-				case 6:	
-				case 13:
-				case 23: 
-					return option;		
-				default:
-					System.out.println("Input a correct IVA value (0, 6, 13 or 23%): ");
-					continue;
-				}
-			
-		}
-	
 	}
 }

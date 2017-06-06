@@ -12,8 +12,7 @@ import io.altar.jseproject.utils.Utils;
 
 public class TextInterface {
 	
-	public static LinkedHashMap<Integer, Product> pList = new LinkedHashMap<Integer, Product>();
-	Set<Entry<Integer, Product>> set = pList.entrySet();
+	public static LinkedHashMap<Integer, Product> pList = new LinkedHashMap<>();
 	
 	private static int pId=0;
 	
@@ -134,24 +133,43 @@ public class TextInterface {
 		
 		
 	//		Inputs
-	if(pList.containsKey(1)){
-		System.out.println("Enter the ID of the product you want to edit: ");
-		int id = Utils.Validate(1, pId);	
+	if(!pList.isEmpty()){
 		
-		for (Entry<Integer, Product> entry : pList.entrySet()){
-		   if (entry.getKey().equals(pId)){
-		      System.out.println(entry.getValue());
-					  }
+//		for (Entry<Integer, Product> entry : pList.entrySet()){
+//		   if (entry.getKey().equals(pId)){
+//		      System.out.println(entry.getValue());
+//			}
+//		}
+		
+		System.out.println("Enter the ID of the product you want to edit (0 to go back to main menu): ");
+		int id = Utils.Validate(0, pId);	
+		double currentPrice = pList.get(id).getPrice();
+		double currentDiscount =  pList.get(id).getDiscount();
+		int currentIva = pList.get(id).getIva();
+		double price2=0;
+		
+		if (id == 0){
+			productList();
 		}
-			System.out.println("The products current price is " + "€. Enter the Product's new price (€): ");
-			double price = Utils.Validate(0.01);	
-			System.out.println("Enter the Product's new discount (€): ");
-			double discount = Utils.Validate(0, price);
-			System.out.println("Enter the Product's new IVA value (%): ");
+		
+			System.out.println("The products current price is " + currentPrice + "€. Enter the Product's new price (€): ");
+			String price = Utils.validateEmpty();	
+			
+			
+			if(price==null){
+				price2 = currentPrice;
+			}else {
+				price2 = Double.parseDouble(price);
+			}
+		
+			System.out.println("The products current discount is "+ currentDiscount +"€. Enter the Product's new discount (€): ");
+			double discount = Utils.Validate(0, price2);
+			
+			System.out.println("The products current IVA is "+ currentIva +"%. Enter the Product's new IVA value (%): ");
 			int iva = Utils.Validate();
 
 			//		Product overwrite
-			Product p = new Product(id, price, discount, iva);
+			Product p = new Product(id, price2, discount, iva);
 			pList.replace(id,p);
 			
 			//		Success messages
@@ -173,10 +191,14 @@ public class TextInterface {
 	public static void productDetails(){
 		
 		//		Inputs
-	if (pList.containsKey(1)){
+	if (!pList.isEmpty()){
 		
-		System.out.println("Enter the ID of the product you want to evaluate: ");
-		int id = Utils.Validate(1, pId);
+		System.out.println("Enter the ID of the product you want to evaluate (0 if you want to go back to main menu): ");
+		int id = Utils.Validate(0, pId);
+		
+		if (id ==0){
+			productList();
+		}
 		
 		for (Entry<Integer, Product> entry : pList.entrySet()){
 			if (entry.getKey().equals(pId)){
@@ -189,20 +211,34 @@ public class TextInterface {
 	}
 	
 	public static void productRemove(){
-		
-		if (pList.containsKey(1)){
+
+				
+		if (!pList.isEmpty()){
 			
-			System.out.println("Enter the ID of the product you want to evaluate: ");
-			int id = Utils.Validate(1, pId);
-			System.out.println("Are you sure you want to remove the product "+id+"? (Y/N):" );
-			String str = Utils.validateStr();
-			
-			pList.remove(id);
 			for (Entry<Integer, Product> entry : pList.entrySet()){
 				if (entry.getKey().equals(pId)){
 					System.out.println(entry.getValue());
 			  	}
 			}
+			
+			System.out.println("Enter the ID of the product you want to remove (0 to return to previous menu):\n");
+			int id = Utils.Validate(0, pId);
+			
+			if (id == 0){
+				productList();
+			}
+	
+			System.out.println("Are you sure you want to remove the product "+id+"? (Y/N):" );
+			String str = Utils.validateStr();
+			
+			if (str.equals("Y")){
+					pList.remove(id);
+					System.out.println("Product was successfully removed.");
+			}else if(str.equals("N")){
+				System.out.println("Product wasn't removed.\n");
+			}
+
+
 			}else{
 				System.out.println("You have no products to remove. Please insert some before.");
 			}

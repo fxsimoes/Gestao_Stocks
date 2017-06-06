@@ -8,15 +8,16 @@ public class Utils {
 	//		Validação de um intervalo
 	public static int Validate(int min, int max) {
 		
-		int option = 0;
-		
 		while (true) {
 			if (Test.scanner.hasNextInt()) {
-				option = Test.scanner.nextInt();
+				int option = Test.scanner.nextInt();
 				if (option >= min && option <= max) {
 					return option;
 				} else if(min != max){
 					System.out.println("Please input a number between " + min + " and " + max);
+				}else if(max < min){
+					System.out.println("Your database is empty. Please add some entities before contuining.");
+					
 				}else{
 					System.out.println("Please input " + min + ", as it is the only option you currently have: ");
 				}
@@ -26,7 +27,7 @@ public class Utils {
 			}
 		}
 	}
-	// 			Validações do Produto
+	// 			Validações do Preço
 	public static int Validate(double zero) {
 		
 		while (true) {
@@ -82,25 +83,33 @@ public class Utils {
 					System.out.println("Input a correct IVA value (0, 6, 13 or 23%): ");
 					continue;
 				}
-			
 		}
-	
 	}
+	
 	public static String validateStr(){
 		
 		while(true){
 			if(Test.scanner.hasNext("Y")){	
-				System.out.println("Product was successfully removed.");
+//				boolean ygnore = "Y".equalsIgnoreCase("y");
 				return "Y";
 			}else if(Test.scanner.hasNext("N")){
-				System.out.println("Product wasn't removed.");
+//				boolean ngnore = "N".equalsIgnoreCase("n");
 				return "N";
 			}else {
 				System.out.println("Please insert a valid option (Y/N): ");
 				Test.scanner.next();
 			}
-			
-		}
+		}		
+	}
+	
+	public static String validateEmpty(){
 		
+		String str = Test.scanner.nextLine();
+		
+		if(str.isEmpty()){
+			return null;
+		}else {
+			return str;
+		}
 	}
 }

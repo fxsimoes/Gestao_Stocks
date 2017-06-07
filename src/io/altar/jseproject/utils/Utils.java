@@ -1,7 +1,6 @@
 package io.altar.jseproject.utils;
 
 import io.altar.jseproject.test.Test;
-import io.altar.jseproject.textinterface.TextInterface;
 
 public class Utils {
 

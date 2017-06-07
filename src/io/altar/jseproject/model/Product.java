@@ -2,8 +2,6 @@ package io.altar.jseproject.model;
 
 import io.altar.jseproject.repository.ProductRepository;
 import io.altar.jseproject.textinterface.TextInterface;
-import java.util.Arrays;
-
 
 public class Product extends Entity {
 
@@ -16,32 +14,7 @@ public class Product extends Entity {
 	public int iva;
 	
 	public double price;
-
-	@Override
-	public String toString(){
-		return "ID  " + product_id + "  | PVP  " + price + "€  | Discount  " + discount + "€  | IVA  " + iva + "%";
-	}
-	
-	public Product(int id, double finalPrice, double DiscountValue, int ivaTax){
 		
-		product_id=id;
-		discount= DiscountValue;
-		iva= ivaTax;
-		price=finalPrice;
-		ProductRepository.getInstance().addToList(this);
-		TextInterface.pList.put(this.product_id, this);
-	}
-		
-	
-//	public Product(String Shelves){
-//		this.Shelves = name;
-//	}
-//	
-//	public String getName(){
-//		return this.name;
-//	}
-//	
-
 	public int getProduct_id() {
 		return product_id;
 	}
@@ -80,5 +53,20 @@ public class Product extends Entity {
 
 	public void setShelf_idLoc(Integer[] shelf_idLoc) {
 		this.shelf_idLoc = shelf_idLoc;
+	}
+	
+	@Override
+	public String toString(){
+		return "ID  " + product_id + "  | PVP  " + price + "€  | Discount  " + discount + "€  | IVA  " + iva + "%";
+	}
+	
+	public Product(int id, double finalPrice, double DiscountValue, int ivaTax){
+		
+		product_id=id;
+		discount= DiscountValue;
+		iva= ivaTax;
+		price=finalPrice;
+		ProductRepository.getInstance().addToList(this);
+		TextInterface.pList.put(this.product_id, this);
 	}
 }

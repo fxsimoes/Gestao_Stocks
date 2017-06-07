@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import io.altar.jseproject.model.Product;
+import io.altar.jseproject.repository.EntityRepository;
 import io.altar.jseproject.test.Test;
 import io.altar.jseproject.utils.Utils;
 
@@ -169,6 +170,7 @@ public class TextInterface {
 			//		Product overwrite
 			Product p = new Product(id, price2, discount, iva);
 			pList.replace(id,p);
+			EntityRepository.entityList.put(id,p);
 			
 			//		Success messages
 			System.out.println("\nThe product with ID of "+ id +" has been successfully edited. ");

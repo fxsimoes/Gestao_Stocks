@@ -9,7 +9,6 @@ import io.altar.jseproject.model.Product;
 import io.altar.jseproject.test.Test;
 import io.altar.jseproject.utils.Utils;
 
-
 public class TextInterface {
 	
 	public static LinkedHashMap<Integer, Product> pList = new LinkedHashMap<>();
@@ -35,7 +34,6 @@ public class TextInterface {
     		System.out.println("I'm out!");
     	}
 	}
-
 	
 	public static void productList(){
 		
@@ -212,7 +210,6 @@ public class TextInterface {
 	
 	public static void productRemove(){
 
-				
 		if (!pList.isEmpty()){
 			
 			for (Entry<Integer, Product> entry : pList.entrySet()){
@@ -227,7 +224,7 @@ public class TextInterface {
 			if (id == 0){
 				productList();
 			}
-	
+			
 			System.out.println("Are you sure you want to remove the product "+id+"? (Y/N):" );
 			String str = Utils.validateStr();
 			
@@ -237,8 +234,6 @@ public class TextInterface {
 			}else if(str.equals("N")){
 				System.out.println("Product wasn't removed.\n");
 			}
-
-
 			}else{
 				System.out.println("You have no products to remove. Please insert some before.");
 			}

@@ -1,13 +1,15 @@
 package io.altar.jseproject.model;
 
+import io.altar.jseproject.repository.ProductRepository;
 import io.altar.jseproject.textinterface.TextInterface;
+import java.util.Arrays;
 
 
-public class Product {
+public class Product extends Entity {
 
 	public int product_id;
 	
-	public String Shelves;
+	public Integer [] shelf_idLoc;
 	
 	public double discount;
 	
@@ -26,7 +28,7 @@ public class Product {
 		discount= DiscountValue;
 		iva= ivaTax;
 		price=finalPrice;
-		
+		ProductRepository.getInstance().addToList(this);
 		TextInterface.pList.put(this.product_id, this);
 	}
 		
@@ -46,14 +48,6 @@ public class Product {
 
 	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
-	}
-
-	public String getShelves() {
-		return Shelves;
-	}
-
-	public void setShelves(String shelves) {
-		Shelves = shelves;
 	}
 
 	public double getDiscount() {
@@ -76,7 +70,15 @@ public class Product {
 		return price;
 	}
 
-	public void setPrice(float price) {
-		this.price = price;
+	public void setPrice(Double price2) {
+		this.price = price2;
+	}
+
+	public Integer[] getShelf_idLoc() {
+		return shelf_idLoc;
+	}
+
+	public void setShelf_idLoc(Integer[] shelf_idLoc) {
+		this.shelf_idLoc = shelf_idLoc;
 	}
 }

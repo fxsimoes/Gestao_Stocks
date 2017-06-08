@@ -1,5 +1,8 @@
 package io.altar.jseproject.utils;
 
+import io.altar.jseproject.model.Entity;
+import io.altar.jseproject.repository.EntityRepository;
+import io.altar.jseproject.repository.ProductRepository;
 import io.altar.jseproject.test.Test;
 
 public class Utils {
@@ -9,7 +12,7 @@ public class Utils {
 		
 		while (true) {
 			if (Test.scanner.hasNextInt()) {
-				int option = Test.scanner.nextInt();
+				Integer option = Test.scanner.nextInt();
 				if (option >= min && option <= max) {
 					return option;
 				} else if(min != max){
@@ -45,7 +48,7 @@ public class Utils {
 	}
 
 		// 			Validação do desconto
-	public static double Validate(int min, double max){
+	public static double Validate(Integer min, double max){
 				
 		while (true) {
 			if (Test.scanner.hasNextInt()) {
@@ -111,4 +114,27 @@ public class Utils {
 			return str;
 		}
 	}
+	
+//	public static Integer validate(String text, String entityType){
+//		Integer ID = null;
+//		EntityRepository<? extends Entity> entityList = null;
+//		if(entityType.equals("product")){
+//			entityList = (EntityRepository<Product>)ProductRepository.getInstance();
+//		}else if(entityType.equals("shelf")){
+//			entityList = (EntityRepository<Shelf>)ShelfRepository.getInstance();
+//		}
+//		while (true) {
+//			ID = validate(0, Collections.max(entityList.keySet()), scanner, text);
+//			if(ID==0){
+//				return ID;
+//			}
+//			if (entityList.containsKey(ID)) {
+//				return ID;
+//			}else{
+//				System.out.println("Por favor escolha uma opção válida!");
+//			}
+//		}
+//	}
+	
 }
+

@@ -27,8 +27,8 @@ public class Product extends Entity {
 		return discount;
 	}
 
-	public void setDiscount(float discount) {
-		this.discount = discount;
+	public void setDiscount(Double discount2) {
+		this.discount = discount2;
 	}
 
 	public int getIva() {
@@ -67,6 +67,6 @@ public class Product extends Entity {
 		iva= ivaTax;
 		price=finalPrice;
 		ProductRepository.getInstance().addToList(this);
-		TextInterface.pList.put(this.product_id, this);
+//		TextInterface.pList.put(this.product_id, this);
 	}
 }

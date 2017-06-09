@@ -60,13 +60,12 @@ public class Product extends Entity {
 		return "ID  " + product_id + "  | PVP  " + price + "€  | Discount  " + discount + "€  | IVA  " + iva + "%";
 	}
 	
-	public Product(int id, double finalPrice, double DiscountValue, int ivaTax){
+	public Product(int pId, double finalPrice, double DiscountValue, int ivaTax){
 		
-		product_id=id;
+		product_id=pId;
 		discount= DiscountValue;
 		iva= ivaTax;
 		price=finalPrice;
 		ProductRepository.getInstance().addToList(this);
-//		TextInterface.pList.put(this.product_id, this);
 	}
 }

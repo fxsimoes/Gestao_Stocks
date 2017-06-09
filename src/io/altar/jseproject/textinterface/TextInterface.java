@@ -141,7 +141,7 @@ public class TextInterface {
 	//		Inputs
 	if(!productList.isEmpty()){
 		
-//		for (Entry<Integer, Product> entry : pList.entrySet()){
+//		for (Entry<Integer, Product> entry : ((Object) productList).entrySet()){
 //		   if (entry.getKey().equals(pId)){
 //		      System.out.println(entry.getValue());
 //			}
@@ -153,36 +153,51 @@ public class TextInterface {
 		double currentDiscount = ((Product) productList.get(id)).getDiscount();
 		double currentPrice = ((Product) productList.get(id)).getPrice();
 		int currentIva = ((Product) productList.get(id)).getIva();
-		double price2=0;
-	
+		double priceFixed=0;
+		double discountFixed=0;
+		int ivaFixed = 0;
+		
 		if (id == 0){
 			productMenu();
 		}
 
 			System.out.println("The products current price is " + currentPrice + "€. Enter the Product's new price (€): ");
-			double price = Utils.Validate(0.01);	
-		
-//			if(price==null){
-//				price2 = currentPrice;
-//			}else {
-//				price2 = Double.parseDouble(price);
-//			}
+			String price = Utils.validateEmpty();	
+			
+			if(price==null){
+				priceFixed = currentPrice;
+			}else{
+				priceFixed = Double.parseDouble(price);
+			}
 		
 			System.out.println("The products current discount is "+ currentDiscount +"€. Enter the Product's new discount (€): ");
-			double discount = Utils.Validate(0, price);
+			String discount = Utils.validateEmpty();
+			
+			if (discount == null){
+				discountFixed = currentDiscount;
+			}else{
+				discountFixed = Double.parseDouble(discount);
+			}
+			
 			
 			System.out.println("The products current IVA is "+ currentIva +"%. Enter the Product's new IVA value (%): ");
-			Integer iva = Utils.Validate();
+			String iva = Utils.validateEmpty();
 
+			if (iva == null){
+				ivaFixed = currentIva;
+			}else{
+				ivaFixed = Integer.parseInt(iva);
+			}
+			
 			//		Product overwrite
-			Product p = new Product(id, price, discount, iva);
+			Product p = new Product(id, priceFixed, discountFixed, ivaFixed);
 //			pList.replace(id,p);
 			
-			ProductRepository.alterElement(id, null, discount, iva, price);
+			ProductRepository.alterElement(id, null, discountFixed, ivaFixed, priceFixed);
 
 			//		Success messages
 			System.out.println("\nThe product with ID of "+ id +" has been successfully edited. ");
-			System.out.println("Its new PVP, Discount and IVA are "+price+"€, "+discount+"€, "+iva+"% respectively.");
+			System.out.println("Its new PVP, Discount and IVA are "+priceFixed+"€, "+discountFixed+"€, "+ivaFixed+"% respectively.");
 			System.out.println("\n");		
 		}else{
 			System.out.println("You have no products to edit. Returning to main menu.");	

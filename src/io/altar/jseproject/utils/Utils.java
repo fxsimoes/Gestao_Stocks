@@ -1,5 +1,8 @@
 package io.altar.jseproject.utils;
 
+import java.util.Collections;
+import java.util.Scanner;
+
 import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.repository.EntityRepository;
 import io.altar.jseproject.repository.ProductRepository;
@@ -29,6 +32,7 @@ public class Utils {
 			}
 		}
 	}
+	
 	// 			Validações do Preço
 	public static int Validate(double zero) {
 		
@@ -91,13 +95,10 @@ public class Utils {
 	public static String validateStr(){
 		
 		while(true){
-			if(Test.scanner.hasNext("Y")){	
-//				boolean ygnore = "Y".equalsIgnoreCase("y");
-				return "Y";
-			}else if(Test.scanner.hasNext("N")){
-//				boolean ngnore = "N".equalsIgnoreCase("n");
-				return "N";
-			}else {
+			if(Test.scanner.hasNext("Y") || Test.scanner.hasNext("N") ){	
+				return Test.scanner.nextLine();
+			}
+			else {
 				System.out.println("Please insert a valid option (Y/N): ");
 				Test.scanner.next();
 			}
@@ -105,15 +106,19 @@ public class Utils {
 	}
 	
 	public static String validateEmpty(){
-		
+
+		Test.scanner = new Scanner(System.in);
 		String str = Test.scanner.nextLine();
-		
-		if(str.isEmpty()){
+		while(true){
+						
+		if(str.isEmpty() || str.matches("[0-9]+")){
 			return null;
 		}else {
-			return str;
+			System.out.println("Please input a valid number or press enter to mantain current value: ");
+			Test.scanner.nextLine();
 		}
-	}
+		}
+}
 	
 //	public static Integer validate(String text, String entityType){
 //		Integer ID = null;
@@ -124,7 +129,7 @@ public class Utils {
 //			entityList = (EntityRepository<Shelf>)ShelfRepository.getInstance();
 //		}
 //		while (true) {
-//			ID = validate(0, Collections.max(entityList.keySet()), scanner, text);
+//			ID = Validate(0, Collections.max(entityList.keySet()), text);
 //			if(ID==0){
 //				return ID;
 //			}
@@ -135,6 +140,6 @@ public class Utils {
 //			}
 //		}
 //	}
-	
+//	
 }
 

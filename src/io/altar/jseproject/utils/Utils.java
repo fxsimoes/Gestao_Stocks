@@ -105,21 +105,34 @@ public class Utils {
 		}		
 	}
 	
-	public static String validateEmpty(){
+	public static String validateEmpty(int min, int max){
 
 		Test.scanner = new Scanner(System.in);
-		String str = Test.scanner.nextLine();
+		
+		double option = 0;
+		
+
+		
 		while(true){
-						
-		if(str.isEmpty() || str.matches("[0-9]+")){
-			return null;
-		}else {
-			System.out.println("Please input a valid number or press enter to mantain current value: ");
-			Test.scanner.nextLine();
-		}
+		
+			String str = Test.scanner.nextLine();	
+			
+			try{
+				option = Double.parseDouble(str);
+			}catch(Exception e){
+				System.out.println("Error, input a number");
+			}
+				
+			if(str.isEmpty()){
+				return null;
+			}else if(str.matches("-?\\d+(\\.\\d+)?") && option >=min && option <= max){
+				return str;
+			}
 		}
 }
 	
+}
+
 //	public static Integer validate(String text, String entityType){
 //		Integer ID = null;
 //		EntityRepository<? extends Entity> entityList = null;
@@ -141,5 +154,5 @@ public class Utils {
 //		}
 //	}
 //	
-}
+
 

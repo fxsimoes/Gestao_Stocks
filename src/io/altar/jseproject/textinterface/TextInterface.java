@@ -101,11 +101,12 @@ public class TextInterface {
 	public static void productCreate(){
 
 		if (!productList.isEmpty()){
+			
 		System.out.println("Products List\n");
-//		for(Integer id:pList.keySet()){
-//			System.out.println(pList.get(id));
-//		}
-//		System.out.println("\n");
+		for(Integer id:productList.keySet()){
+			System.out.println(productList.get(id));
+		}
+		System.out.println("\n");
 		}
 		
 		//			Inputs
@@ -141,11 +142,10 @@ public class TextInterface {
 	//		Inputs
 	if(!productList.isEmpty()){
 		
-//		for (Entry<Integer, Product> entry : ((Object) productList).entrySet()){
-//		   if (entry.getKey().equals(pId)){
-//		      System.out.println(entry.getValue());
-//			}
-//		}
+		for(Integer id:productList.keySet()){
+			System.out.println(productList.get(id));
+		}
+		System.out.println("\n");
 		
 		System.out.println("Enter the ID of the product you want to edit (0 to go back to main menu): ");
 		
@@ -162,16 +162,16 @@ public class TextInterface {
 		}
 
 			System.out.println("The products current price is " + currentPrice + "€. Enter the Product's new price (€): ");
-			String price = Utils.validateEmpty();	
+			String price = Utils.validateEmpty(0,500);	
 			
 			if(price==null){
 				priceFixed = currentPrice;
 			}else{
 				priceFixed = Double.parseDouble(price);
 			}
-		
+	
 			System.out.println("The products current discount is "+ currentDiscount +"€. Enter the Product's new discount (€): ");
-			String discount = Utils.validateEmpty();
+			String discount = Utils.validateEmpty(0,500);
 			
 			if (discount == null){
 				discountFixed = currentDiscount;
@@ -179,9 +179,8 @@ public class TextInterface {
 				discountFixed = Double.parseDouble(discount);
 			}
 			
-			
 			System.out.println("The products current IVA is "+ currentIva +"%. Enter the Product's new IVA value (%): ");
-			String iva = Utils.validateEmpty();
+			String iva = Utils.validateEmpty(0,500);
 
 			if (iva == null){
 				ivaFixed = currentIva;
@@ -189,10 +188,7 @@ public class TextInterface {
 				ivaFixed = Integer.parseInt(iva);
 			}
 			
-			//		Product overwrite
-			Product p = new Product(id, priceFixed, discountFixed, ivaFixed);
-//			pList.replace(id,p);
-			
+			//		Product Editing			
 			ProductRepository.alterElement(id, null, discountFixed, ivaFixed, priceFixed);
 
 			//		Success messages

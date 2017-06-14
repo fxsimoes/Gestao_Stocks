@@ -105,31 +105,50 @@ public class Utils {
 		}		
 	}
 	
-	public static String validateEmpty(int min, int max){
+	public static String validateEmpty(int min, double max){
 
-		Test.scanner = new Scanner(System.in);
-		
-		double option = 0;
-		
-
-		
+		Test.scanner = new Scanner(System.in);		
+	
 		while(true){
-		
-			String str = Test.scanner.nextLine();	
+			String str = Test.scanner.nextLine();
 			
-			try{
-				option = Double.parseDouble(str);
-			}catch(Exception e){
-				System.out.println("Error, input a number");
-			}
-				
 			if(str.isEmpty()){
 				return null;
-			}else if(str.matches("-?\\d+(\\.\\d+)?") && option >=min && option <= max){
-				return str;
+			}else if(str.matches("-?\\d+(\\.\\d+)?")){
+				Double option = Double.parseDouble(str);
+				if(option >=min && option <= max){
+					return str;
+				}else{
+					System.out.println("Please input a value between "+min+" and "+max+"€:");
+				}
+			}else{
+				System.out.println("Error, please input a number: ");
 			}
 		}
 }
+	public static String validateEmpty(){
+		Test.scanner = new Scanner(System.in);
+		
+		while(true) {
+			String str = Test.scanner.nextLine();
+			
+			if(!str.isEmpty()){				
+			
+			switch (str){
+				case "0": 
+				case "6":	
+				case "13":
+				case "23": 
+					return str;		
+				default:
+					System.out.println("Input a correct IVA value (0, 6, 13 or 23%): ");
+					continue;		
+			}
+			}else{
+				return null;
+				}
+		}
+	}
 	
 }
 

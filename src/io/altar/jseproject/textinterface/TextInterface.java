@@ -1,10 +1,5 @@
 package io.altar.jseproject.textinterface;
 
-
-import java.util.LinkedHashMap;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.repository.EntityRepository;
@@ -162,7 +157,7 @@ public class TextInterface {
 		}
 
 			System.out.println("The products current price is " + currentPrice + "€. Enter the Product's new price (€): ");
-			String price = Utils.validateEmpty(0,500);	
+			String price = Utils.validateEmpty(0,50);	
 			
 			if(price==null){
 				priceFixed = currentPrice;
@@ -171,7 +166,7 @@ public class TextInterface {
 			}
 	
 			System.out.println("The products current discount is "+ currentDiscount +"€. Enter the Product's new discount (€): ");
-			String discount = Utils.validateEmpty(0,500);
+			String discount = Utils.validateEmpty(0,priceFixed);
 			
 			if (discount == null){
 				discountFixed = currentDiscount;
@@ -180,7 +175,7 @@ public class TextInterface {
 			}
 			
 			System.out.println("The products current IVA is "+ currentIva +"%. Enter the Product's new IVA value (%): ");
-			String iva = Utils.validateEmpty(0,500);
+			String iva = Utils.validateEmpty();
 
 			if (iva == null){
 				ivaFixed = currentIva;

@@ -18,12 +18,12 @@ public class Utils {
 				Integer option = Test.scanner.nextInt();
 				if (option >= min && option <= max) {
 					return option;
-				} else if(min != max){
+				} else if (min != max) {
 					System.out.println("Please input a number between " + min + " and " + max);
-				}else if(max < min){
+				} else if (max < min) {
 					System.out.println("Your database is empty. Please add some entities before contuining.");
-					
-				}else{
+
+				} else {
 					System.out.println("Please input " + min + ", as it is the only option you currently have: ");
 				}
 			} else {
@@ -33,7 +33,7 @@ public class Utils {
 		}
 	}
 	
-	// 			Validações do Preço
+	// Validações do Preço
 	public static int Validate(double zero) {
 		
 		while (true) {
@@ -42,7 +42,7 @@ public class Utils {
 				if (option >= zero) {
 					return option;
 				} else {
-					System.out.println("Please input a valid number (higher than zero).");
+					System.out.println("Please input a valid number (higher than zero):");
 				}
 			} else {
 				System.out.println("Error, NaN. Input a number.");
@@ -93,6 +93,8 @@ public class Utils {
 	}
 	
 	public static String validateStr(){
+		
+		Test.scanner = new Scanner(System.in);
 		
 		while(true){
 			if(Test.scanner.hasNext("Y") || Test.scanner.hasNext("N") ){	
@@ -151,27 +153,3 @@ public class Utils {
 	}
 	
 }
-
-//	public static Integer validate(String text, String entityType){
-//		Integer ID = null;
-//		EntityRepository<? extends Entity> entityList = null;
-//		if(entityType.equals("product")){
-//			entityList = (EntityRepository<Product>)ProductRepository.getInstance();
-//		}else if(entityType.equals("shelf")){
-//			entityList = (EntityRepository<Shelf>)ShelfRepository.getInstance();
-//		}
-//		while (true) {
-//			ID = Validate(0, Collections.max(entityList.keySet()), text);
-//			if(ID==0){
-//				return ID;
-//			}
-//			if (entityList.containsKey(ID)) {
-//				return ID;
-//			}else{
-//				System.out.println("Por favor escolha uma opção válida!");
-//			}
-//		}
-//	}
-//	
-
-

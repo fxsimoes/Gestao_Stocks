@@ -12,7 +12,7 @@ public class ProductRepository extends EntityRepository<Product> {
 		return INSTANCE;
 	}
 
-	public static void alterElement(Integer id, Integer[] shelf, Double discount, Integer tax, Double price) {
+	public static void editElement(Integer id, Integer[] shelf, Double discount, Integer tax, Double price) {
 		((Product)ProductRepository.getInstance().get(id)).setShelf_idLoc(shelf);
 		((Product)ProductRepository.getInstance().get(id)).setDiscount(discount);
 		((Product)ProductRepository.getInstance().get(id)).setIva(tax);

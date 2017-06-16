@@ -4,6 +4,7 @@ import java.util.Map;
 
 import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.model.Product;
+import io.altar.jseproject.model.Shelf;
 import io.altar.jseproject.repository.EntityRepository;
 import io.altar.jseproject.repository.ProductRepository;
 import io.altar.jseproject.repository.ShelfRepository;
@@ -19,6 +20,7 @@ public class TextInterface {
 	private static ShelfRepository shelfList = ShelfRepository.getInstance();
 
 	private static int pId = 0;
+	private static int sId = 0;
 
 	public static void mainMenu() {
 
@@ -33,7 +35,7 @@ public class TextInterface {
 			productMenu();
 			break;
 		case 2:
-			ShelvesList();
+			shelfMenu();
 			break;
 		case 3:
 			System.out.println("I'm out!");
@@ -72,7 +74,7 @@ public class TextInterface {
 		}
 	}
 
-	public static void ShelvesList() {
+	public static void shelfMenu() {
 
 		System.out.println("1. Create new shelves");
 		System.out.println("2. Edit existing shelves");
@@ -83,12 +85,17 @@ public class TextInterface {
 		int option = Utils.Validate(1, 5);
 		switch (option) {
 		case 1:
+			shelfCreate();
+			shelfMenu();
 			break;
 		case 2:
+			shelfMenu();
 			break;
 		case 3:
+			shelfMenu();
 			break;
 		case 4:
+			shelfMenu();
 			break;
 		case 5:
 			mainMenu();
@@ -180,7 +187,7 @@ public class TextInterface {
 			}
 
 			// Product Editing
-			ProductRepository.alterElement(id, null, discountFixed, ivaFixed, priceFixed);
+			ProductRepository.editElement(id, null, discountFixed, ivaFixed, priceFixed);
 
 			// Success messages
 			System.out.println("\nThe product with ID of " + id + " has been successfully edited. ");
@@ -230,7 +237,7 @@ public class TextInterface {
 			String str = Utils.validateStr();
 
 			if (str.equals("Y")) {
-				productList.removeElement(id);
+				productList.remove(id);
 				System.out.println("Product was successfully removed.");
 			} else if (str.equals("N")) {
 				System.out.println("Product wasn't removed.\n");
@@ -238,5 +245,33 @@ public class TextInterface {
 		} else {
 			System.out.println("You have no products to remove. Please insert some before.");
 		}
+	}
+	
+	public static void shelfCreate(){
+		if (!shelfList.isEmpty()) {
+
+			shelfList.getList();
+		}
+
+		// Inputs		
+		System.out.println("Enter the Shelf's location (): ");
+		double location = Utils.Validate(0);
+		
+		System.out.println("Enter the Shelf's capacity (): ");
+		Integer capacity = Utils.Validate(0);
+
+		System.out.println("Enter the Shelf's daily price (€): ");
+		double dailyPrice = Utils.Validate();
+
+
+		// Create product and show results
+		System.out.println("\nYour newly added shelf has " + ". \n");
+		sId++;
+		Shelf s = new Shelf(sId ,location, capacity, dailyPrice);
+
+		System.out.println("\nShelf successfully created. Returning to previous menu..\n");
+
+		// Show Products in different lines
+			productList.getList();
 	}
 }

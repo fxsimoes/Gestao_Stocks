@@ -12,7 +12,7 @@ public class ShelfRepository extends EntityRepository<Shelf> {
 		return INSTANCE;
 	}
 
-	public static void alterElement(Integer id, Double location, Integer capacity, Double dailyPrice) {
+	public static void editElement(Integer id, Double location, Integer capacity, Double dailyPrice) {
 		((Shelf)ShelfRepository.getInstance().get(id)).setLocation(location);
 		((Shelf)ShelfRepository.getInstance().get(id)).setCapacity(capacity);
 		((Shelf)ShelfRepository.getInstance().get(id)).setDailyPrice(dailyPrice);

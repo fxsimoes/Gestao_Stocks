@@ -149,7 +149,7 @@ public class Utils {
 				System.out.println("Error, please input a number: ");
 			}
 		}
-}
+	}	
 	
 	public static String validateEmpty(){
 		Test.scanner = new Scanner(System.in);

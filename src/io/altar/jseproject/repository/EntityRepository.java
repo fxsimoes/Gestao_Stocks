@@ -18,11 +18,11 @@ public class EntityRepository<E extends Entity> {
 		entityList.put(entity.getId(), entity);
 	}
 
-	public void removeElement(Integer id) {
+	public void remove(Integer id) {
 		entityList.remove(id);
 	}
 
-	public void alterElement() {
+	public void editElement() {
 	}
 
 	public Entity get(Integer id) {

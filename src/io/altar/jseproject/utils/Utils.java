@@ -127,7 +127,30 @@ public class Utils {
 				System.out.println("Error, please input a number: ");
 			}
 		}
+	}
+	
+	public static String validateEmpty(int zero){
+
+		Test.scanner = new Scanner(System.in);		
+	
+		while(true){
+			String str = Test.scanner.nextLine();
+			
+			if(str.isEmpty()){
+				return null;
+			}else if(str.matches("-?\\d+(\\.\\d+)?")){
+				Double option = Double.parseDouble(str);
+				if(option >=zero){
+					return str;
+				}else{
+					System.out.println("Please input a value higher than "+zero+" : ");
+				}
+			}else{
+				System.out.println("Error, please input a number: ");
+			}
+		}
 }
+	
 	public static String validateEmpty(){
 		Test.scanner = new Scanner(System.in);
 		

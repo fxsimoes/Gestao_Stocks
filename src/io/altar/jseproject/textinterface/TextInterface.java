@@ -100,11 +100,7 @@ public class TextInterface {
 
 		if (!productList.isEmpty()) {
 
-			System.out.println("Products List\n");
-			for (Integer id : productList.keySet()) {
-				System.out.println(productList.get(id));
-			}
-			System.out.println("\n");
+			productList.getList();
 		}
 
 		// Inputs
@@ -127,10 +123,7 @@ public class TextInterface {
 		System.out.println("\nProduct successfully created. Returning to previous menu..\n");
 
 		// Show Products in different lines
-		for (Integer id : productList.keySet()) {
-			System.out.println(productList.get(id));
-		}
-		System.out.println("\n");
+			productList.getList();
 	}
 
 	// Edit Product Details
@@ -139,10 +132,7 @@ public class TextInterface {
 		// Inputs
 		if (!productList.isEmpty()) {
 
-			for (Integer id : productList.keySet()) {
-				System.out.println(productList.get(id));
-			}
-			System.out.println("\n");
+			productList.getList();
 
 			System.out.println("Enter the ID of the product you want to edit (0 to go back to main menu): ");
 
@@ -161,7 +151,7 @@ public class TextInterface {
 
 			System.out.println(
 					"The products current price is " + currentPrice + "€. Enter the Product's new price (€): ");
-			String price = Utils.validateEmpty(0, 50);
+			String price = Utils.validateEmpty(0);
 
 			if (price == null) {
 				priceFixed = currentPrice;
@@ -200,11 +190,6 @@ public class TextInterface {
 		} else {
 			System.out.println("You have no products to edit. Returning to main menu.");
 		}
-
-		// for(Integer id:pList.keySet()){
-		// System.out.println(pList.get(id));
-		// }
-		// System.out.println("\n");
 	}
 
 	// Show Product Details
@@ -212,10 +197,9 @@ public class TextInterface {
 
 		// Inputs
 		if (!productList.isEmpty()) {
-			for (Integer id : productList.keySet()) {
-				System.out.println(productList.get(id));
-			}
-			System.out.println("\n");
+			
+			productList.getList();
+			
 			System.out.println(
 					"Enter the ID of the product you want to evaluate (0 if you want to go back to main menu): ");
 			int id = Utils.Validate(0, pId);
@@ -230,14 +214,10 @@ public class TextInterface {
 	}
 
 	public static void productRemove() {
-
+		
 		if (!productList.isEmpty()) {
 
-			for (Integer id : productList.keySet()) {
-				System.out.println("List of products:\n"+productList.get(id));
-			}
-
-			System.out.println("\n");
+			productList.getList();
 
 			System.out.println("Enter the ID of the product you want to remove (0 to return to previous menu):\n");
 			Integer id = Utils.Validate(0, pId);

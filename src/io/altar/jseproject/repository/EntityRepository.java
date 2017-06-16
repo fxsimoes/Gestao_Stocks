@@ -45,15 +45,13 @@ public class EntityRepository<E extends Entity> {
 		System.out.println(entityList.get(key).toString() + "\n");
 	}
 
-	public String getList(String listType) {
-		String text = String.format("List of %s:\n", listType);
-		if (!entityList.isEmpty()) {
-			for (Integer id : entityList.keySet()) {
-				text += entityList.get(id);
-			}
-		} else {
-			text += "List is empty, there is nothing to remove.\n";
-		}
-		return text;
+	public void getList() {
+
+		System.out.println("List of entities:\n");
+		for (Integer id : entityList.keySet()) {
+			System.out.println(entityList.get(id));	
+		} 
+		System.out.println("\n");
+
 	}
 }

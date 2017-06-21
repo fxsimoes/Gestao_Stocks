@@ -234,7 +234,7 @@ public class TextInterface {
 		if (!productList.isEmpty()) {
 
 			for (Integer id : productList.keySet()) {
-				System.out.println("List of products:\n"+productList.get(id));
+				System.out.println(productList.get(id));
 			}
 
 			System.out.println("\n");

@@ -1,11 +1,7 @@
 package io.altar.jseproject.utils;
 
-import java.util.Collections;
 import java.util.Scanner;
 
-import io.altar.jseproject.model.Entity;
-import io.altar.jseproject.repository.EntityRepository;
-import io.altar.jseproject.repository.ProductRepository;
 import io.altar.jseproject.test.Test;
 
 public class Utils {

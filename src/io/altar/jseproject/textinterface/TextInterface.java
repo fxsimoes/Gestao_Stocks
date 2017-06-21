@@ -1,14 +1,9 @@
 package io.altar.jseproject.textinterface;
 
-import java.util.Map;
-
-import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.model.Product;
 import io.altar.jseproject.model.Shelf;
-import io.altar.jseproject.repository.EntityRepository;
 import io.altar.jseproject.repository.ProductRepository;
 import io.altar.jseproject.repository.ShelfRepository;
-import io.altar.jseproject.test.Test;
 import io.altar.jseproject.utils.Utils;
 
 public class TextInterface {
@@ -125,6 +120,7 @@ public class TextInterface {
 		// Create product and show results
 		System.out.println("\nYour newly added product has " + roundfloat2 + "% discount. \n");
 		pId++;
+		@SuppressWarnings("unused")
 		Product p = new Product(pId, price, discount, iva);
 
 		System.out.println("\nProduct successfully created. Returning to previous menu..\n");
@@ -224,15 +220,12 @@ public class TextInterface {
 		
 		if (!productList.isEmpty()) {
 
-<<<<<<< HEAD
 			for (Integer id : productList.keySet()) {
 				System.out.println(productList.get(id));
 			}
 
 			System.out.println("\n");
-=======
 			productList.getList();
->>>>>>> 07065584c337fcfcf27a7cbc61080cf1c572468f
 
 			System.out.println("Enter the ID of the product you want to remove (0 to return to previous menu):\n");
 			Integer id = Utils.Validate(0, pId);
@@ -275,6 +268,7 @@ public class TextInterface {
 		// Create product and show results
 		System.out.println("\nYour newly added shelf has " + ". \n");
 		sId++;
+		@SuppressWarnings("unused")
 		Shelf s = new Shelf(sId ,location, capacity, dailyPrice);
 
 		System.out.println("\nShelf successfully created. Returning to previous menu..\n");

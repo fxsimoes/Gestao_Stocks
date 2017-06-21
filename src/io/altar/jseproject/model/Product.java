@@ -1,7 +1,6 @@
 package io.altar.jseproject.model;
 
 import io.altar.jseproject.repository.ProductRepository;
-import io.altar.jseproject.textinterface.TextInterface;
 
 public class Product extends Entity {
 

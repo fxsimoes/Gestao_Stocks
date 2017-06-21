@@ -12,6 +12,7 @@ public class Shelf extends Entity {
 	public Integer getId() {
 		return productID;
 	}
+	
 	public void setId(int id) {
 		this.productID = id;
 	}
@@ -19,22 +20,28 @@ public class Shelf extends Entity {
 	public int getCapacity() {
 		return capacity;
 	}
+	
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
+	
 	public Double getDailyPrice() {
 		return dailyPrice;
 	}
+	
 	public void setDailyPrice(Double price) {
 		this.dailyPrice = price;
 	}
+	
 	public Double getLocation() {
 		return location;
 	}
+	
 	public void setLocation(Double location) {
 		this.location = location;
 	}
-	public Shelf(Double location, Integer capacity, Integer productID, Double dailyPrice){
+	
+	public Shelf( Integer productID, Double location, Integer capacity, Double dailyPrice){
 		this.location = location;
 		this.capacity = capacity;
 		this.productID = productID;

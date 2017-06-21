@@ -4,6 +4,7 @@ import java.util.Map;
 
 import io.altar.jseproject.model.Entity;
 import io.altar.jseproject.model.Product;
+import io.altar.jseproject.model.Shelf;
 import io.altar.jseproject.repository.EntityRepository;
 import io.altar.jseproject.repository.ProductRepository;
 import io.altar.jseproject.repository.ShelfRepository;
@@ -19,6 +20,7 @@ public class TextInterface {
 	private static ShelfRepository shelfList = ShelfRepository.getInstance();
 
 	private static int pId = 0;
+	private static int sId = 0;
 
 	public static void mainMenu() {
 
@@ -33,7 +35,7 @@ public class TextInterface {
 			productMenu();
 			break;
 		case 2:
-			ShelvesList();
+			shelfMenu();
 			break;
 		case 3:
 			System.out.println("I'm out!");
@@ -72,7 +74,7 @@ public class TextInterface {
 		}
 	}
 
-	public static void ShelvesList() {
+	public static void shelfMenu() {
 
 		System.out.println("1. Create new shelves");
 		System.out.println("2. Edit existing shelves");
@@ -83,12 +85,17 @@ public class TextInterface {
 		int option = Utils.Validate(1, 5);
 		switch (option) {
 		case 1:
+			shelfCreate();
+			shelfMenu();
 			break;
 		case 2:
+			shelfMenu();
 			break;
 		case 3:
+			shelfMenu();
 			break;
 		case 4:
+			shelfMenu();
 			break;
 		case 5:
 			mainMenu();
@@ -100,11 +107,7 @@ public class TextInterface {
 
 		if (!productList.isEmpty()) {
 
-			System.out.println("Products List\n");
-			for (Integer id : productList.keySet()) {
-				System.out.println(productList.get(id));
-			}
-			System.out.println("\n");
+			productList.getList();
 		}
 
 		// Inputs
@@ -127,10 +130,7 @@ public class TextInterface {
 		System.out.println("\nProduct successfully created. Returning to previous menu..\n");
 
 		// Show Products in different lines
-		for (Integer id : productList.keySet()) {
-			System.out.println(productList.get(id));
-		}
-		System.out.println("\n");
+			productList.getList();
 	}
 
 	// Edit Product Details
@@ -139,10 +139,7 @@ public class TextInterface {
 		// Inputs
 		if (!productList.isEmpty()) {
 
-			for (Integer id : productList.keySet()) {
-				System.out.println(productList.get(id));
-			}
-			System.out.println("\n");
+			productList.getList();
 
 			System.out.println("Enter the ID of the product you want to edit (0 to go back to main menu): ");
 
@@ -161,7 +158,7 @@ public class TextInterface {
 
 			System.out.println(
 					"The products current price is " + currentPrice + "€. Enter the Product's new price (€): ");
-			String price = Utils.validateEmpty(0, 50);
+			String price = Utils.validateEmpty(0);
 
 			if (price == null) {
 				priceFixed = currentPrice;
@@ -190,7 +187,7 @@ public class TextInterface {
 			}
 
 			// Product Editing
-			ProductRepository.alterElement(id, null, discountFixed, ivaFixed, priceFixed);
+			ProductRepository.editElement(id, null, discountFixed, ivaFixed, priceFixed);
 
 			// Success messages
 			System.out.println("\nThe product with ID of " + id + " has been successfully edited. ");
@@ -200,11 +197,6 @@ public class TextInterface {
 		} else {
 			System.out.println("You have no products to edit. Returning to main menu.");
 		}
-
-		// for(Integer id:pList.keySet()){
-		// System.out.println(pList.get(id));
-		// }
-		// System.out.println("\n");
 	}
 
 	// Show Product Details
@@ -212,10 +204,9 @@ public class TextInterface {
 
 		// Inputs
 		if (!productList.isEmpty()) {
-			for (Integer id : productList.keySet()) {
-				System.out.println(productList.get(id));
-			}
-			System.out.println("\n");
+			
+			productList.getList();
+			
 			System.out.println(
 					"Enter the ID of the product you want to evaluate (0 if you want to go back to main menu): ");
 			int id = Utils.Validate(0, pId);
@@ -230,14 +221,18 @@ public class TextInterface {
 	}
 
 	public static void productRemove() {
-
+		
 		if (!productList.isEmpty()) {
 
+<<<<<<< HEAD
 			for (Integer id : productList.keySet()) {
 				System.out.println(productList.get(id));
 			}
 
 			System.out.println("\n");
+=======
+			productList.getList();
+>>>>>>> 07065584c337fcfcf27a7cbc61080cf1c572468f
 
 			System.out.println("Enter the ID of the product you want to remove (0 to return to previous menu):\n");
 			Integer id = Utils.Validate(0, pId);
@@ -250,7 +245,7 @@ public class TextInterface {
 			String str = Utils.validateStr();
 
 			if (str.equals("Y")) {
-				productList.removeElement(id);
+				productList.remove(id);
 				System.out.println("Product was successfully removed.");
 			} else if (str.equals("N")) {
 				System.out.println("Product wasn't removed.\n");
@@ -258,5 +253,33 @@ public class TextInterface {
 		} else {
 			System.out.println("You have no products to remove. Please insert some before.");
 		}
+	}
+	
+	public static void shelfCreate(){
+		if (!shelfList.isEmpty()) {
+
+			shelfList.getList();
+		}
+
+		// Inputs		
+		System.out.println("Enter the Shelf's location (): ");
+		double location = Utils.Validate(0);
+		
+		System.out.println("Enter the Shelf's capacity (): ");
+		Integer capacity = Utils.Validate(0);
+
+		System.out.println("Enter the Shelf's daily price (€): ");
+		double dailyPrice = Utils.Validate();
+
+
+		// Create product and show results
+		System.out.println("\nYour newly added shelf has " + ". \n");
+		sId++;
+		Shelf s = new Shelf(sId ,location, capacity, dailyPrice);
+
+		System.out.println("\nShelf successfully created. Returning to previous menu..\n");
+
+		// Show Products in different lines
+			productList.getList();
 	}
 }

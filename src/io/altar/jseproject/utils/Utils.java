@@ -42,7 +42,7 @@ public class Utils {
 				if (option >= zero) {
 					return option;
 				} else {
-					System.out.println("Please input a valid number (higher than zero):");
+					System.out.println("Please input a valid number (higher than zero): ");
 				}
 			} else {
 				System.out.println("Error, NaN. Input a number.");
@@ -121,7 +121,7 @@ public class Utils {
 				if(option >=min && option <= max){
 					return str;
 				}else{
-					System.out.println("Please input a value between "+min+" and "+max+"€:");
+					System.out.println("Please input a value between "+min+" and "+max+":");
 				}
 			}else{
 				System.out.println("Error, please input a number: ");

@@ -89,12 +89,15 @@ public class TextInterface {
 			shelfMenu();
 			break;
 		case 2:
+			shelfEdit();
 			shelfMenu();
 			break;
 		case 3:
+			shelfDetails();
 			shelfMenu();
 			break;
 		case 4:
+			shelfRemove();
 			shelfMenu();
 			break;
 		case 5:
@@ -111,9 +114,9 @@ public class TextInterface {
 		}
 
 		// Inputs
-		System.out.println("Enter the Product's price (â‚¬): ");
+		System.out.println("Enter the Product's price (€): ");
 		double price = Utils.Validate(0);
-		System.out.println("Enter the Product's discount (â‚¬): ");
+		System.out.println("Enter the Product's discount (€): ");
 		double discount = Utils.Validate(0, price);
 		System.out.println("Enter the Product's IVA (%): ");
 		int iva = Utils.Validate();
@@ -224,15 +227,14 @@ public class TextInterface {
 		
 		if (!productList.isEmpty()) {
 
-<<<<<<< HEAD
 			for (Integer id : productList.keySet()) {
 				System.out.println(productList.get(id));
 			}
 
 			System.out.println("\n");
-=======
+			
 			productList.getList();
->>>>>>> 07065584c337fcfcf27a7cbc61080cf1c572468f
+
 
 			System.out.println("Enter the ID of the product you want to remove (0 to return to previous menu):\n");
 			Integer id = Utils.Validate(0, pId);
@@ -268,18 +270,137 @@ public class TextInterface {
 		System.out.println("Enter the Shelf's capacity (): ");
 		Integer capacity = Utils.Validate(0);
 
-		System.out.println("Enter the Shelf's daily price (â‚¬): ");
-		double dailyPrice = Utils.Validate();
+		System.out.println("Enter the Shelf's daily price (€): ");
+		double dailyPrice = Utils.Validate(0);
 
 
-		// Create product and show results
-		System.out.println("\nYour newly added shelf has " + ". \n");
+		// Create shelf and show results
+		System.out.println("\nYour newly added shelf is placed on " + location + ", has " + capacity + " slots for products and costs " + dailyPrice+ "daily. \n");
 		sId++;
 		Shelf s = new Shelf(sId ,location, capacity, dailyPrice);
 
 		System.out.println("\nShelf successfully created. Returning to previous menu..\n");
 
-		// Show Products in different lines
-			productList.getList();
+		// Show shelves in different lines
+			shelfList.getList();
 	}
+	
+	public static void shelfEdit() {
+
+		// Inputs
+		if (!shelfList.isEmpty()) {
+
+			shelfList.getList();
+
+			System.out.println("Enter the ID of the shelf you want to edit (0 to go back to main menu): ");
+
+			Integer id = Utils.Validate(0, sId);
+
+			if (id == 0) {
+				shelfMenu();
+			}
+
+			double currentLocation = ((Shelf) shelfList.get(id)).getLocation();
+			int currentCapacity = ((Shelf) shelfList.get(id)).getCapacity();
+			double currentPrice = ((Shelf) shelfList.get(id)).getDailyPrice();
+			double locationFixed = 0;
+			Integer capacityFixed = 0;
+			double priceFixed = 0;
+
+			System.out.println(
+					"The shelf's current location is " + currentLocation + ". Enter the shelf's new location: ");
+			String location = Utils.validateEmpty(0);
+
+			if (location == null) {
+				locationFixed = currentPrice;
+			} else {
+				locationFixed = Double.parseDouble(location);
+			}
+
+			System.out.println("The shelf's current capacity is " + currentCapacity + " products. Enter the shelf's new capacity: ");
+			String capacity = Utils.validateEmpty(0);
+
+			if (capacity == null) {
+				capacityFixed = currentCapacity;
+			} else {
+				capacityFixed = Integer.parseInt(capacity);
+			}
+
+			System.out.println(
+					"The shelf's current daily price is " + currentPrice + "€. Enter the shelf's new price (€): ");
+			String dailyPrice = Utils.validateEmpty(0);
+
+			if (dailyPrice == null) {
+				priceFixed = currentPrice;
+			} else {
+				priceFixed = Integer.parseInt(dailyPrice);
+			}
+
+			// Product Editing
+			ShelfRepository.editElement(id, locationFixed, capacityFixed, priceFixed);
+
+			// Success messages
+			System.out.println("\nThe shelf with ID of " + id + " has been successfully edited. ");
+			System.out.println("Its new location, capacity and daily price are " + locationFixed + ", " + capacityFixed + ", "
+					+ priceFixed + "€ respectively.");
+			System.out.println("\n");
+		} else {
+			System.out.println("You have no shelves to edit. Returning to main menu.");
+		}
+	}
+	
+	public static void shelfDetails() {
+
+		// Inputs
+		if (!shelfList.isEmpty()) {
+			
+			shelfList.getList();
+			
+			System.out.println(
+					"Enter the ID of the shelf you want to evaluate (0 if you want to go back to main menu): ");
+			int id = Utils.Validate(0, sId);
+
+			if (id == 0) {
+				shelfMenu();
+			}
+			shelfList.displayElement(sId);
+		} else {
+			System.out.println("You have no shelves to check details from. Please insert some before.");
+		}
+	}
+	
+	public static void shelfRemove() {
+		
+		if (!shelfList.isEmpty()) {
+
+			for (Integer id : shelfList.keySet()) {
+				System.out.println(shelfList.get(id));
+			}
+
+			System.out.println("\n");
+			
+			shelfList.getList();
+
+
+			System.out.println("Enter the ID of the shelf you want to remove (0 to return to previous menu):\n");
+			Integer id = Utils.Validate(0, pId);
+
+			if (id == 0) {
+				shelfMenu();
+			}
+
+			System.out.println("Are you sure you want to remove the shelf with ID " + id + "? (Y/N):");
+			String str = Utils.validateStr();
+
+			if (str.equals("Y")) {
+				shelfList.remove(id);
+				System.out.println("Shelf was successfully removed.");
+			} else if (str.equals("N")) {
+				System.out.println("Shelf wasn't removed.\n");
+			}
+		} else {
+			System.out.println("You have no shelves to remove. Please insert some before.");
+		}
+	}
+	
 }

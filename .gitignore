@@ -1,2 +1,5 @@
 /bin/
 *.prefs
+Java.project.zip
+.project
+.classpath

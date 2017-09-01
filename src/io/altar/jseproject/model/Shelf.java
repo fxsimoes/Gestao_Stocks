@@ -51,7 +51,7 @@ public class Shelf extends Entity {
 	
 	@Override
 	public String toString(){
-		return "| ID: " + getId() + "| Location: " + location + "| Capacity: " + capacity + "| Product ID: " + productID + "| Location Rental Price: " + location + "â‚¬|\n";
+		return "| ID: " + getId() + "| Location: " + location + "| Capacity: " + capacity + "| Product ID: " + productID + "| Location Rental Price: " + location + "�\n";
 	}
 
 	}
